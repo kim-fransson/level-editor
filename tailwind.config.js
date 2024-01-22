@@ -1,5 +1,6 @@
 import reactAriaComponents from "tailwindcss-react-aria-components";
 import tailwindcssAnimate from "tailwindcss-animate";
+import tailwindcssGridAreas from "@savvywombat/tailwindcss-grid-areas";
 import daisyui from "daisyui";
 
 /** @type {import('tailwindcss').Config} */
@@ -18,6 +19,20 @@ export default {
       opacity: {
         87: 0.87,
       },
+      gridTemplateAreas: {
+        'layout': [
+          'tiles toolbar',
+          'tiles content',
+          'tiles footer',
+        ],
+      },
+      gridTemplateColumns: {
+        'layout': '8rem 1fr',
+        15: 'repeat(15, minmax(0, 1fr))',
+      },
+      gridTemplateRows: {
+        'layout': '3.25rem 1fr 2rem'
+      },
     },
   },
   plugins: [
@@ -28,5 +43,6 @@ export default {
     ({ addUtilities }) => {
       addUtilities({});
     },
+    tailwindcssGridAreas,
   ],
 };
