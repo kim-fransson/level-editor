@@ -1,0 +1,16 @@
+@import '@fontsource-variable/montserrat';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Montserrat Variable', sans-serif;
+    color: white
+}
+
+@layer components {}
+
+
+
+
