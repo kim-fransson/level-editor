@@ -15,23 +15,20 @@ export default {
         "light-gray": "#9D9D9D",
         "light-blue": "#528EFF",
         red: "#FF7878",
+        blue: "#2867DD",
       },
       opacity: {
         87: 0.87,
       },
       gridTemplateAreas: {
-        'layout': [
-          'tiles toolbar',
-          'tiles content',
-          'tiles footer',
-        ],
+        layout: ["tiles toolbar", "tiles content", "tiles footer"],
       },
       gridTemplateColumns: {
-        'layout': '8rem 1fr',
-        15: 'repeat(15, minmax(0, 1fr))',
+        layout: "8rem 1fr",
+        15: "repeat(15, minmax(0, 1fr))",
       },
       gridTemplateRows: {
-        'layout': '3.25rem 1fr 2rem'
+        layout: "3.25rem 1fr 2rem",
       },
     },
   },

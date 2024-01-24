@@ -1,10 +1,5 @@
-export const generateGrid = (rows: number, columns: number) => {
-  const grid = [];
-
-  for (let i = 0; i < rows; i++) {
-    const row = Array(columns).fill(null);
-    grid.push(row);
-  }
-
-  return grid;
+export const generateGridList = (rows: number, columns: number) => {
+  return Array.from({ length: rows * columns }, (_, index) => ({
+    id: index + 1,
+  }));
 };
