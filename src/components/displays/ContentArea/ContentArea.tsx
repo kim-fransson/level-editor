@@ -4,7 +4,7 @@ import { forwardRef, ForwardedRef } from "react";
 interface ContentAreaProps {}
 
 export const ContentArea = forwardRef<HTMLDivElement, ContentAreaProps>(
-  (props, ref: ForwardedRef<HTMLDivElement>) => {
+  (_props, ref: ForwardedRef<HTMLDivElement>) => {
     return (
       <div
         className={`grid-in-content bg-white/87 flex justify-center items-center`}
