@@ -6,6 +6,7 @@ type Tile = {
 type Cell = {
   id: number;
   tile?: Tile;
+  order?: number;
 };
 
 type AppState = {
@@ -13,4 +14,10 @@ type AppState = {
   updateCursor: (cursor?: string) => void;
   activeTile?: Tile;
   updateActiveTile: (tile?: Tile) => void;
+};
+
+type CellsState = {
+  paintedCells: Cell[];
+  updatePaintedCells: (cells: Cell[]) => void;
+  undoPaint: () => void;
 };

@@ -7,6 +7,7 @@ import {
   NotSupported,
   Toolbar,
 } from "./components";
+import CellsProvider from "./context/cellsContext";
 
 export default function App() {
   const contentAreaRef = useRef(null);
@@ -14,7 +15,7 @@ export default function App() {
   useCursor(cursor, contentAreaRef);
 
   return (
-    <>
+    <CellsProvider>
       <div className="h-dvh grid-areas-layout grid-cols-layout grid-rows-layout hidden md:grid">
         <TilesSidebar />
         <ContentArea ref={contentAreaRef} />
@@ -22,6 +23,6 @@ export default function App() {
         <Footer />
       </div>
       <NotSupported />
-    </>
+    </CellsProvider>
   );
 }

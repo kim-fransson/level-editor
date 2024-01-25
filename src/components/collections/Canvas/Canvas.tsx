@@ -1,4 +1,4 @@
-import { useApp } from "@/hooks";
+import { useApp, useCells } from "@/hooks";
 import { generateGridList } from "@/utils";
 import { useEffect, useRef, useState } from "react";
 import { ListBox, ListBoxItem } from "react-aria-components";
@@ -8,7 +8,8 @@ export interface CanvasProps {}
 
 export const Canvas = () => {
   const { activeTile } = useApp();
-  const [selectedCells, setSelectedCells] = useState<Cell[]>([]);
+  const { paintedCells, updatePaintedCells } = useCells();
+
   const [isPressing, setIsPressing] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -47,16 +48,14 @@ export const Canvas = () => {
   }, []);
 
   const paintCell = (cellId: number) => {
-    const isPainted = selectedCells.find((cell) => cell.id === cellId);
+    const isPainted = paintedCells.find((cell) => cell.id === cellId);
 
     if (!isPainted) {
-      setSelectedCells((curr) => [...curr, { id: cellId, tile: activeTile }]);
-    } else if (isPainted.tile?.id !== activeTile?.id) {
-      setSelectedCells((curr) =>
-        curr.map((cell) =>
-          cell.id === cellId ? { ...cell, tile: activeTile } : cell,
-        ),
-      );
+      const updatedPaintedCells = [
+        ...paintedCells,
+        { id: cellId, tile: activeTile },
+      ];
+      updatePaintedCells(updatedPaintedCells);
     }
   };
 
@@ -65,7 +64,7 @@ export const Canvas = () => {
       <ListBox
         className={`inline-grid grid-cols-15 bg-white *:border-light-gray *:border-[0.5px] border-[0.5px] border-light-gray`}
         items={generateGridList(15, 15)}
-        selectedKeys={selectedCells.map((cell) => cell.id)}
+        selectedKeys={paintedCells.map((cell) => cell.id)}
         selectionMode="multiple"
         layout="grid"
         orientation="vertical"
@@ -80,7 +79,7 @@ export const Canvas = () => {
             {({ isSelected, isFocusVisible, isHovered }) => (
               <Cell
                 activeTile={activeTile}
-                tile={selectedCells.find((cell) => cell.id === item.id)?.tile}
+                tile={paintedCells.find((cell) => cell.id === item.id)?.tile}
                 isSelected={isSelected}
                 isFocusVisible={isFocusVisible}
                 isPressing={isPressing}
@@ -119,27 +118,23 @@ const Cell = ({
     }
   }, [isHovered, isPressing, isFocusVisible, onSelect, activeTile]);
 
-  if (isFocusVisible || isHovered) {
-    return (
-      activeTile && (
-        <div className="flex-1 flex justify-center items-center relative">
-          <img
-            src={activeTile.src}
-            className="absolute w-full h-full opacity-50"
-          />
-        </div>
-      )
-    );
-  }
-
   return (
-    tile && (
-      <div className="flex-1 flex justify-center items-center relative">
+    <div className="flex-1 group flex justify-center items-center relative">
+      {tile && isSelected && (
         <img
           className={twMerge(isSelected ? "block" : "hidden", "w-full h-full")}
           src={tile.src}
         />
-      </div>
-    )
+      )}
+      {!isSelected && activeTile && (
+        <img
+          src={activeTile.src}
+          className={twMerge(
+            "absolute w-full h-full hidden group-hover:block opacity-50",
+            isFocusVisible ? "block" : "",
+          )}
+        />
+      )}
+    </div>
   );
 };

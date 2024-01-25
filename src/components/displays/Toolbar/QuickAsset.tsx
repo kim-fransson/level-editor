@@ -15,7 +15,10 @@ export const QuickAsset = () => {
 
   return (
     <TooltipTrigger delay={300}>
-      <Button onPress={onQuickAccess} className="outline-none">
+      <Button
+        onPress={onQuickAccess}
+        className="outline-none hover:bg-black p-2 focus-visible:ring-2 ring-yellow-400 rounded"
+      >
         <img src={activeTile?.src ?? defaultTile.src} className="w-5 h-5" />
       </Button>
       <Tooltip>Quick asset</Tooltip>

@@ -31,8 +31,8 @@ export const Tiles = ({ tiles }: TilesProps) => {
       {(item) => (
         <ListBoxItem
           textValue={`tile number ${item.id}`}
-          className="w-10 h-10 hover:bg-dark-gray cursor-pointer flex justify-center items-center 
-          transition-colors rounded-[4px] selected:bg-blue focus-visible:ring-2 ring-yellow-400 outline-none
+          className="w-10 h-10 hover:bg-black cursor-pointer flex justify-center items-center 
+          transition-colors rounded selected:bg-blue focus-visible:ring-2 ring-yellow-400 outline-none
           select-none"
           id={item.id}
         >
