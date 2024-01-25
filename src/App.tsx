@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { useCursor } from "./hooks";
+import { useRef } from "react";
+import { useApp, useCursor } from "./hooks";
 import {
   TilesSidebar,
   ContentArea,
@@ -10,15 +10,15 @@ import {
 
 export default function App() {
   const contentAreaRef = useRef(null);
-  const [activeTile, setActiveTile] = useState<Tile>();
-  useCursor(activeTile?.src, contentAreaRef);
+  const { cursor } = useApp();
+  useCursor(cursor, contentAreaRef);
 
   return (
     <>
       <div className="h-dvh grid-areas-layout grid-cols-layout grid-rows-layout hidden md:grid">
+        <TilesSidebar />
+        <ContentArea ref={contentAreaRef} />
         <Toolbar />
-        <TilesSidebar onSelectTile={setActiveTile} />
-        <ContentArea ref={contentAreaRef} activeTile={activeTile} />
         <Footer />
       </div>
       <NotSupported />

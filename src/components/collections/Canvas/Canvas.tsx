@@ -1,13 +1,13 @@
+import { useApp } from "@/hooks";
 import { generateGridList } from "@/utils";
 import { useEffect, useRef, useState } from "react";
 import { ListBox, ListBoxItem } from "react-aria-components";
 import { twMerge } from "tailwind-merge";
 
-export interface CanvasProps {
-  activeTile?: Tile;
-}
+export interface CanvasProps {}
 
-export const Canvas = ({ activeTile }: CanvasProps) => {
+export const Canvas = () => {
+  const { activeTile } = useApp();
   const [selectedCells, setSelectedCells] = useState<Cell[]>([]);
   const [isPressing, setIsPressing] = useState(false);
 

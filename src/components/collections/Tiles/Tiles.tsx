@@ -1,14 +1,22 @@
+import { useApp } from "@/hooks";
 import { ListBox, ListBoxItem } from "react-aria-components";
 
 export interface TilesProps {
   tiles: Tile[];
-  onSelectTile: (tile: Tile) => void;
 }
 
-export const Tiles = ({ tiles, onSelectTile }: TilesProps) => {
+export const Tiles = ({ tiles }: TilesProps) => {
+  const { updateCursor, updateActiveTile, activeTile } = useApp();
+
+  const onSelectTile = (tile: Tile) => {
+    updateActiveTile(tile);
+    updateCursor(tile.src);
+  };
+
   return (
     <ListBox
       items={tiles}
+      selectedKeys={activeTile ? [activeTile.id] : []}
       selectionMode="single"
       layout="grid"
       orientation="vertical"

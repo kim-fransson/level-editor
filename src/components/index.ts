@@ -5,3 +5,4 @@ export * from "./displays/Toolbar/Toolbar";
 export * from "./displays/Footer/Footer";
 export * from "./collections/Tiles/Tiles";
 export * from "./collections/Canvas/Canvas";
+export * from "./overlays/Tooltip/Tooltip";

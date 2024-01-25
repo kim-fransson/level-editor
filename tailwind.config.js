@@ -42,4 +42,7 @@ export default {
     },
     tailwindcssGridAreas,
   ],
+  daisyui: {
+    themes: ["light"],
+  },
 };
