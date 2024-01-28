@@ -35,7 +35,7 @@ export const Settings = () => {
 
   return (
     <DialogTrigger>
-      <TooltipTrigger delay={300}>
+      <TooltipTrigger delay={500}>
         <Button
           className="outline-none hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed transition-all text-white
           flex items-center justify-center p-2  rounded pressed:scale-90 focus:bg-blue"
@@ -46,8 +46,19 @@ export const Settings = () => {
       </TooltipTrigger>
       <Popover
         offset={20}
-        className="max-w-xs w-full bg-dark-gray rounded shadow-xl border-[0.5px] border-light-gray outline-none
-        py-6 px-5"
+        className={({
+          isEntering,
+          isExiting,
+        }) => `max-w-xs w-full bg-dark-gray rounded shadow-xl border-[0.5px] border-light-gray outline-none
+        py-6 px-5 ${
+          isEntering
+            ? "animate-in fade-in placement-bottom:slide-in-from-top-1 placement-top:slide-in-from-bottom-1 ease-out duration-200"
+            : ""
+        } ${
+          isExiting
+            ? "animate-out fade-out placement-bottom:slide-out-to-top-1 placement-top:slide-out-to-bottom-1 ease-in duration-150"
+            : ""
+        }`}
       >
         <Dialog className="outline-none flex flex-col">
           <h2 className="font-medium text-white/87 tracking-[0.32px] mb-4">
