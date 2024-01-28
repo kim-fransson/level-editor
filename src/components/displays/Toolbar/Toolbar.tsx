@@ -1,6 +1,8 @@
 import { Eraser } from "./Eraser";
 import { QuickAsset } from "./QuickAsset";
 import { Undo } from "./Undo";
+import { ZoomIn } from "./ZoomIn";
+import { ZoomOut } from "./ZoomOut";
 
 export interface ToolbarProps {}
 
@@ -13,7 +15,10 @@ export const Toolbar = () => {
         <Eraser />
       </div>
 
-      <div className="bg-dark-gray p-3"></div>
+      <div className="bg-dark-gray p-3 flex items-center justify-center gap-2">
+        <ZoomIn />
+        <ZoomOut />
+      </div>
 
       <div className="ml-auto bg-dark-gray p-3"></div>
     </div>

@@ -14,6 +14,8 @@ type AppState = {
   updateCursor: (cursor?: string) => void;
   activeTile?: Tile;
   updateActiveTile: (tile?: Tile) => void;
+  zoomScale: number;
+  updateZoomScale: (scale: number) => void;
 };
 
 type PaintMode = "paint" | "erase" | "view";
