@@ -5,7 +5,7 @@ export interface TilesSidebarProps {}
 
 export const TilesSidebar = () => {
   return (
-    <div className="grid-in-tiles bg-dark-gray border-2 border-light-gray px-3 py-2">
+    <div className="grid-in-tiles bg-dark-gray border-2 border-light-gray px-3 py-2 overflow-auto">
       <Tiles tiles={tiles} />
     </div>
   );

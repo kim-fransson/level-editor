@@ -1,5 +1,6 @@
 import { Eraser } from "./Eraser";
 import { QuickAsset } from "./QuickAsset";
+import { Settings } from "./Settings";
 import { Undo } from "./Undo";
 import { ZoomIn } from "./ZoomIn";
 import { ZoomOut } from "./ZoomOut";
@@ -20,7 +21,9 @@ export const Toolbar = () => {
         <ZoomOut />
       </div>
 
-      <div className="ml-auto bg-dark-gray p-3"></div>
+      <div className="ml-auto bg-dark-gray p-3 flex justify-center items-center">
+        <Settings />
+      </div>
     </div>
   );
 };
