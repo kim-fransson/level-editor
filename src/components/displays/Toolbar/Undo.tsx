@@ -3,8 +3,7 @@ import { Button, TooltipTrigger } from "react-aria-components";
 import { useHotkeys } from "react-hotkeys-hook";
 
 import UndoIcon from "@assets/icons/undo-icon.svg?react";
-import { useCells } from "@/hooks";
-import useIsMac from "@/hooks/useIsMac";
+import { useCells, useIsMac } from "@/hooks";
 
 export const Undo = () => {
   const { undoPaint, paintedCells } = useCells();

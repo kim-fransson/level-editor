@@ -11,7 +11,7 @@ interface TooltipProps extends Omit<AriaTooltipProps, "children"> {
 }
 
 const styles = tv({
-  base: "group bg-dark-gray shadow-lg text-white text-xs rounded-lg p-1 flex items-center justify-center gap-2 font-medium will-change-transform",
+  base: "group bg-dark-gray shadow-lg text-white text-xs rounded-lg p-2 flex items-center justify-center gap-2 font-medium will-change-transform",
   variants: {
     isEntering: {
       true: "animate-in fade-in placement-bottom:slide-in-from-top-0.5 placement-top:slide-in-from-bottom-0.5 placement-left:slide-in-from-right-0.5 placement-right:slide-in-from-left-0.5 ease-out duration-200",

@@ -1,4 +1,4 @@
-import { useApp } from "@/hooks";
+import { useApp, useCells } from "@/hooks";
 import { ListBox, ListBoxItem } from "react-aria-components";
 
 export interface TilesProps {
@@ -7,16 +7,18 @@ export interface TilesProps {
 
 export const Tiles = ({ tiles }: TilesProps) => {
   const { updateCursor, updateActiveTile, activeTile } = useApp();
+  const { updatePaintMode, paintMode } = useCells();
 
   const onSelectTile = (tile: Tile) => {
     updateActiveTile(tile);
     updateCursor(tile.src);
+    updatePaintMode("paint");
   };
 
   return (
     <ListBox
       items={tiles}
-      selectedKeys={activeTile ? [activeTile.id] : []}
+      selectedKeys={activeTile && paintMode === "paint" ? [activeTile.id] : []}
       selectionMode="single"
       layout="grid"
       orientation="vertical"

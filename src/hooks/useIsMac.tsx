@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useIsMac = (): boolean => {
+export const useIsMac = (): boolean => {
   const [isMac, setIsMac] = useState<boolean>(false);
 
   useEffect(() => {
@@ -20,5 +20,3 @@ const useIsMac = (): boolean => {
 
   return isMac;
 };
-
-export default useIsMac;

@@ -1,3 +1,4 @@
+import { Eraser } from "./Eraser";
 import { QuickAsset } from "./QuickAsset";
 import { Undo } from "./Undo";
 
@@ -9,6 +10,7 @@ export const Toolbar = () => {
       <div className="bg-dark-gray p-3 flex items-center justify-center gap-2">
         <QuickAsset />
         <Undo />
+        <Eraser />
       </div>
 
       <div className="bg-dark-gray p-3"></div>

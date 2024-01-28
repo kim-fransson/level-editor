@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useApp, useCells } from "@/hooks";
 import { generateGridList } from "@/utils";
 import { useEffect, useRef, useState } from "react";
@@ -8,7 +9,7 @@ export interface CanvasProps {}
 
 export const Canvas = () => {
   const { activeTile } = useApp();
-  const { paintedCells, updatePaintedCells } = useCells();
+  const { paintedCells, updatePaintedCells, paintMode } = useCells();
 
   const [isPressing, setIsPressing] = useState(false);
 
@@ -50,19 +51,21 @@ export const Canvas = () => {
   const paintCell = (cellId: number) => {
     const isPainted = paintedCells.find((cell) => cell.id === cellId);
 
-    if (!isPainted) {
+    if (!isPainted && paintMode === "paint") {
       const updatedPaintedCells = [
         ...paintedCells,
         { id: cellId, tile: activeTile },
       ];
       updatePaintedCells(updatedPaintedCells);
+    } else if (isPainted && paintMode === "erase") {
+      updatePaintedCells(paintedCells.filter((cell) => cell.id !== cellId));
     }
   };
 
   return (
     <div ref={containerRef}>
       <ListBox
-        className={`inline-grid grid-cols-15 bg-white *:border-light-gray *:border-[0.5px] border-[0.5px] border-light-gray`}
+        className={`inline-grid grid-cols-15 bg-white border-[0.5px] border-light-gray`}
         items={generateGridList(15, 15)}
         selectedKeys={paintedCells.map((cell) => cell.id)}
         selectionMode="multiple"
@@ -73,7 +76,7 @@ export const Canvas = () => {
         {(item) => (
           <ListBoxItem
             textValue={`cell number ${item.id}`}
-            className="w-8 h-8 outline-none flex selected:border-none"
+            className="w-8 h-8 flex outline-none"
             id={item.id}
           >
             {({ isSelected, isFocusVisible, isHovered }) => (
@@ -85,6 +88,7 @@ export const Canvas = () => {
                 isPressing={isPressing}
                 isHovered={isHovered}
                 onSelect={() => paintCell(item.id)}
+                paintMode={paintMode}
               />
             )}
           </ListBoxItem>
@@ -102,6 +106,7 @@ interface CellProps {
   isPressing?: boolean;
   isHovered?: boolean;
   onSelect: () => void;
+  paintMode: PaintMode;
 }
 const Cell = ({
   activeTile,
@@ -111,22 +116,38 @@ const Cell = ({
   isPressing,
   isHovered,
   onSelect,
+  paintMode,
 }: CellProps) => {
   useEffect(() => {
-    if (activeTile && isPressing && (isHovered || isFocusVisible)) {
+    if (
+      (activeTile || paintMode === "erase") &&
+      isPressing &&
+      (isHovered || isFocusVisible)
+    ) {
       onSelect();
     }
-  }, [isHovered, isPressing, isFocusVisible, onSelect, activeTile]);
+  }, [isHovered, isPressing, isFocusVisible, onSelect]);
 
   return (
-    <div className="flex-1 group flex justify-center items-center relative">
+    <div
+      className={twMerge(
+        "flex-1 group flex justify-center items-center relative transition-opacity overflow-hidden",
+        "border-[0.5px] border-light-gray",
+        isSelected && !isFocusVisible && "border-none",
+        isFocusVisible && "border-yellow-400 border-2",
+      )}
+    >
       {tile && isSelected && (
         <img
-          className={twMerge(isSelected ? "block" : "hidden", "w-full h-full")}
+          className={twMerge(
+            isSelected ? "block" : "hidden",
+            "w-full h-full",
+            paintMode === "erase" && "hover:opacity-50",
+          )}
           src={tile.src}
         />
       )}
-      {!isSelected && activeTile && (
+      {!isSelected && activeTile && paintMode === "paint" && (
         <img
           src={activeTile.src}
           className={twMerge(

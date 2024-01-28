@@ -16,8 +16,12 @@ type AppState = {
   updateActiveTile: (tile?: Tile) => void;
 };
 
+type PaintMode = "paint" | "erase" | "view";
+
 type CellsState = {
   paintedCells: Cell[];
   updatePaintedCells: (cells: Cell[]) => void;
   undoPaint: () => void;
+  paintMode: PaintMode;
+  updatePaintMode: (paintMode: PaintMode) => void;
 };
