@@ -9,7 +9,8 @@ export interface CanvasProps {}
 
 export const Canvas = () => {
   const { activeTile } = useApp();
-  const { paintedCells, updatePaintedCells, paintMode } = useCells();
+  const { paintedCells, updatePaintedCells, paintMode, rows, columns } =
+    useCells();
 
   const [isPressing, setIsPressing] = useState(false);
 
@@ -65,8 +66,9 @@ export const Canvas = () => {
   return (
     <div ref={containerRef}>
       <ListBox
-        className={`inline-grid grid-cols-15 bg-white border-[0.5px] border-light-gray`}
-        items={generateGridList(15, 15)}
+        className={`inline-grid bg-white border-[0.5px] border-light-gray`}
+        style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
+        items={generateGridList(rows, columns)}
         selectedKeys={paintedCells.map((cell) => cell.id)}
         selectionMode="multiple"
         layout="grid"

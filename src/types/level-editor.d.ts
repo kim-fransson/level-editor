@@ -26,4 +26,8 @@ type CellsState = {
   undoPaint: () => void;
   paintMode: PaintMode;
   updatePaintMode: (paintMode: PaintMode) => void;
+  rows: number;
+  columns: number;
+  updateRows: (rows: number) => void;
+  updateColumns: (cols: number) => void;
 };
