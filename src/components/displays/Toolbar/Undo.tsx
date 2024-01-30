@@ -3,10 +3,10 @@ import { Button, TooltipTrigger } from "react-aria-components";
 import { useHotkeys } from "react-hotkeys-hook";
 
 import UndoIcon from "@assets/icons/undo-icon.svg?react";
-import { useCells, useIsMac } from "@/hooks";
+import { useIsMac, useLevel } from "@/hooks";
 
 export const Undo = () => {
-  const { undoPaint, paintedCells } = useCells();
+  const { undoPaint, paintedCells } = useLevel();
   useHotkeys(["ctrl+z", "mod+z"], () => undoPaint());
   const isMac = useIsMac();
   return (

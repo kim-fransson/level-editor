@@ -12,16 +12,16 @@ import {
 
 import CogWheel from "@assets/icons/settings-icon.svg?react";
 import { useState } from "react";
-import { exportCanvas } from "@/utils";
-import { useCells } from "@/hooks";
+import { useLevel } from "@/hooks";
 
 export const Settings = () => {
   const [fileName, setFileName] = useState("Untitled");
-  const { paintedCells, columns, rows, updateColumns, updateRows } = useCells();
+  const { grid, updateGridSize } = useLevel();
+
+  const rows = grid.length;
+  const columns = grid[0].length;
 
   const handleExport = () => {
-    const grid = exportCanvas(15, 15, paintedCells);
-
     const jsonString = JSON.stringify(grid);
     const blob = new Blob([jsonString], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -76,31 +76,39 @@ export const Settings = () => {
           </h2>
           <Form className="flex gap-4 justify-start mb-3">
             <NumberField
-              className="flex flex-col max-w-16 gap-2 justify-start relative"
+              className="flex flex-col max-w-16 gap-2 justify-start relative disabled:opacity-50 disabled:cursor-not-allowed"
               value={rows}
-              onChange={(value) => value && updateRows(value)}
+              onChange={(value) => value && updateGridSize(value, columns)}
               minValue={5}
               maxValue={25}
               isRequired
             >
-              <Label className="font-medium text-xs text-white/87">Rows</Label>
-              <Input className="rounded border-2 focus:border-blue transition-colors border-light-gray shadow-lg p-2 font-medium text-white tracking-[0.32px] bg-black outline-none" />
+              <Label className="font-medium text-xs text-white/87 disabled:cursor-not-allowed">
+                Rows
+              </Label>
+              <Input
+                className="rounded border-2 focus:border-blue transition-colors border-light-gray shadow-lg p-2 font-medium text-white tracking-[0.32px] bg-black outline-none
+                disabled:cursor-not-allowed"
+              />
             </NumberField>
 
             <NumberField
-              className="flex flex-col max-w-16 gap-2 relative"
+              className="flex flex-col max-w-16 gap-2 relative disabled:opacity-50 disabled:cursor-not-allowed"
               value={columns}
               minValue={5}
               maxValue={25}
               isRequired
-              onChange={(value) => value && updateColumns(value)}
+              onChange={(value) => value && updateGridSize(rows, value)}
             >
-              <Label className="font-medium text-xs text-white/87">
+              <Label className="font-medium text-xs text-white/87 disabled:cursor-not-allowed">
                 Columns
               </Label>
-              <Input className="rounded border-2 focus:border-blue transition-colors border-light-gray shadow-lg p-2 font-medium text-white tracking-[0.32px] bg-black outline-none" />
+              <Input className="rounded border-2 disabled:cursor-not-allowed focus:border-blue transition-colors border-light-gray shadow-lg p-2 font-medium text-white tracking-[0.32px] bg-black outline-none" />
             </NumberField>
           </Form>
+          <span className="text-sm text-red">
+            Be aware that any changes will be lost when resizing #lazydeveloper
+          </span>
         </Dialog>
       </Popover>
     </DialogTrigger>

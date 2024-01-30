@@ -27,3 +27,19 @@ export const exportCanvas = (
 
   return gridArray;
 };
+
+export const createCell = (id: number, row: number, col: number): Cell => ({
+  id,
+  coordinates: { row, col },
+  images: [],
+});
+
+export const generateCellsArray = (rows: number, cols: number): Cell[][] => {
+  const cellsArray: Cell[][] = Array.from({ length: rows }, (_, row) =>
+    Array.from({ length: cols }, (_, col) =>
+      createCell(row * cols + col, row, col),
+    ),
+  );
+
+  return cellsArray;
+};

@@ -1,6 +1,6 @@
 import { Tooltip } from "@/components";
 import { tiles } from "@/data/tiles";
-import { useApp, useCells, useIsMac } from "@/hooks";
+import { useApp, useIsMac, useLevel } from "@/hooks";
 import { Button, TooltipTrigger } from "react-aria-components";
 import { useHotkeys } from "react-hotkeys-hook";
 
@@ -8,13 +8,14 @@ const defaultTile = tiles[0];
 
 export const QuickAsset = () => {
   const { activeTile, updateCursor, updateActiveTile } = useApp();
-  const { updatePaintMode } = useCells();
+  const { updateMode } = useLevel();
+
   const isMac = useIsMac();
 
   const onQuickAccess = () => {
     updateCursor(activeTile?.src ?? defaultTile.src);
     updateActiveTile(activeTile ?? defaultTile);
-    updatePaintMode("paint");
+    updateMode("paint");
   };
 
   useHotkeys(["ctrl+a", "mod+a"], () => onQuickAccess());

@@ -6,7 +6,11 @@ type Tile = {
 type Cell = {
   id: number;
   tile?: Tile;
-  order?: number;
+  images: string[];
+  coordinates: {
+    row: number;
+    col: number;
+  };
 };
 
 type AppState = {
@@ -18,16 +22,43 @@ type AppState = {
   updateZoomScale: (scale: number) => void;
 };
 
-type PaintMode = "paint" | "erase" | "view";
+type Mode = "paint" | "erase" | "view";
 
-type CellsState = {
+type LevelState = {
+  grid: Cell[][];
   paintedCells: Cell[];
-  updatePaintedCells: (cells: Cell[]) => void;
+  mode: Mode;
+  paint: (cell: Cell, img?: string) => void;
+  erase: (cell: Cell) => void;
+  updateMode: (mode: Mode) => void;
   undoPaint: () => void;
-  paintMode: PaintMode;
-  updatePaintMode: (paintMode: PaintMode) => void;
+  updateGridSize: (rows: number, cols: number) => void;
+};
+
+type LevelAction = Paint | UpdateMode | Erase | UndoPaint | UpdateGridSize;
+
+type Paint = {
+  type: "PAINT";
+  cell: Cell;
+  img: string;
+};
+
+type Erase = {
+  type: "ERASE";
+  cell: Cell;
+};
+
+type UpdateMode = {
+  type: "UPDATE_MODE";
+  mode: Mode;
+};
+
+type UndoPaint = {
+  type: "UNDO_PAINT";
+};
+
+type UpdateGridSize = {
+  type: "UPDATE_GRID_SIZE";
   rows: number;
-  columns: number;
-  updateRows: (rows: number) => void;
-  updateColumns: (cols: number) => void;
+  cols: number;
 };

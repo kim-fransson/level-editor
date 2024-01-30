@@ -4,17 +4,17 @@ import { useHotkeys } from "react-hotkeys-hook";
 
 import RubberIcon from "@assets/icons/rubber-icon.svg?react";
 
-import { useApp, useCells, useIsMac } from "@/hooks";
+import { useApp, useIsMac, useLevel } from "@/hooks";
 import { twMerge } from "tailwind-merge";
 
 export const Eraser = () => {
   const { updateCursor } = useApp();
-  const { paintedCells, paintMode, updatePaintMode } = useCells();
+  const { updateMode, mode, paintedCells } = useLevel();
 
   const onPress = () => {
     if (paintedCells.length !== 0) {
       updateCursor("/icons/eraser.svg");
-      updatePaintMode("erase");
+      updateMode("erase");
     }
   };
 
@@ -28,7 +28,7 @@ export const Eraser = () => {
         className={twMerge(
           "outline-none hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed transition-all text-white",
           "flex items-center justify-center p-2  rounded pressed:scale-90",
-          paintMode === "erase" ? "bg-blue" : "focus:bg-blue",
+          mode === "erase" ? "bg-blue" : "focus:bg-blue",
         )}
       >
         <RubberIcon />

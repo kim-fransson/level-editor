@@ -7,15 +7,17 @@ import {
   NotSupported,
   Toolbar,
 } from "./components";
-import CellsProvider from "./context/cellsContext";
+import { LevelProvider } from "./context/LevelContext";
 
+// todo: A way to isolate hotkeys?
+// todo: overflow issue
 export default function App() {
   const contentAreaRef = useRef(null);
   const { cursor } = useApp();
   useCursor(cursor, contentAreaRef);
 
   return (
-    <CellsProvider>
+    <LevelProvider>
       <div className="h-dvh grid-areas-layout grid-cols-layout grid-rows-layout hidden md:grid">
         <TilesSidebar />
         <ContentArea ref={contentAreaRef} />
@@ -23,6 +25,6 @@ export default function App() {
         <Footer />
       </div>
       <NotSupported />
-    </CellsProvider>
+    </LevelProvider>
   );
 }
