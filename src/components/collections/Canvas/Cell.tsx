@@ -44,9 +44,9 @@ export const Cell = ({ isFocusVisible, cell }: CellProps) => {
       {...mergeProps(pressProps, hoverProps)}
       className={twMerge(
         "flex-1 group flex justify-center items-center relative transition-opacity overflow-hidden",
-        "border-[0.5px] border-light-gray",
-        isFocusVisible && "border-yellow-400 border-2",
-        cell.images.length > 0 && "border-none",
+        "ring-1 ring-light-gray",
+        isFocusVisible && "ring-yellow-400 ring-2",
+        cell.images.length > 0 && "ring-0",
         mode === "erase" && "hover:opacity-50",
       )}
     >

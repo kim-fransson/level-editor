@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 export const usePress = () => {
   const [isPressing, setIsPressing] = useState(false);
-  const throttledValue = useThrottle(isPressing, 200);
+  const throttledValue = useThrottle(isPressing, 100);
 
   const ref = useRef<HTMLDivElement>(null);
 

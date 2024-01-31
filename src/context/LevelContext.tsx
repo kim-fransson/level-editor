@@ -1,5 +1,4 @@
 import { initialState, levelReducer } from "@/reducers/levelReducer";
-import { useLocalStorage } from "@uidotdev/usehooks";
 import {
   PropsWithChildren,
   createContext,
@@ -11,15 +10,7 @@ import {
 export const LevelContext = createContext(initialState);
 
 export const LevelProvider = ({ children }: PropsWithChildren) => {
-  const [persistentState, setPersistentState] = useLocalStorage(
-    "state",
-    initialState,
-  );
-  const [state, dispatch] = useReducer(levelReducer, persistentState);
-
-  useEffect(() => {
-    setPersistentState({ ...state, mode: "view" });
-  }, [setPersistentState, state]);
+  const [state, dispatch] = useReducer(levelReducer, initialState);
 
   const paint = (cell: Cell, img?: string) => {
     if (img) {
@@ -58,6 +49,21 @@ export const LevelProvider = ({ children }: PropsWithChildren) => {
       cols,
     });
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("state")) {
+      dispatch({
+        type: "INIT_STORED_STATE",
+        value: JSON.parse(localStorage.getItem("state") as string),
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (state !== initialState) {
+      localStorage.setItem("state", JSON.stringify({ ...state, mode: "view" }));
+    }
+  }, [state]);
 
   const memoizedValue = useMemo(() => {
     return {

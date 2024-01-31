@@ -16,6 +16,10 @@ export const levelReducer = (state: LevelState, action: LevelAction) => {
   const { grid, paintedCells } = state;
 
   switch (action.type) {
+    case "INIT_STORED_STATE": {
+      return action.value;
+    }
+
     case "PAINT": {
       const { cell, img } = action;
 

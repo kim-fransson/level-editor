@@ -35,7 +35,18 @@ type LevelState = {
   updateGridSize: (rows: number, cols: number) => void;
 };
 
-type LevelAction = Paint | UpdateMode | Erase | UndoPaint | UpdateGridSize;
+type LevelAction =
+  | Paint
+  | UpdateMode
+  | Erase
+  | UndoPaint
+  | UpdateGridSize
+  | InitStoredState;
+
+type InitStoredState = {
+  type: "INIT_STORED_STATE";
+  value: LevelState;
+};
 
 type Paint = {
   type: "PAINT";
