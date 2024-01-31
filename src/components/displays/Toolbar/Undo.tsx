@@ -15,7 +15,7 @@ export const Undo = () => {
         isDisabled={paintedCells.length === 0}
         onPress={undoPaint}
         className="outline-none hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed transition-all text-white
-      flex items-center justify-center p-2 focus:bg-blue rounded pressed:scale-90"
+      flex items-center justify-center p-2 focus-visible:ring-2 ring-yellow-400 rounded pressed:scale-90 pressed:bg-blue"
       >
         <UndoIcon />
       </Button>

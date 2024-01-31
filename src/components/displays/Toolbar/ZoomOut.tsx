@@ -20,7 +20,7 @@ export const ZoomOut = () => {
         isDisabled={zoomScale === 50}
         onPress={onZoomOut}
         className="outline-none hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed transition-all text-white
-          flex items-center justify-center p-2  rounded pressed:scale-90 focus:bg-blue"
+          flex items-center justify-center p-2  rounded pressed:scale-90 focus-visible:ring-2 ring-yellow-400 pressed:bg-blue"
       >
         <ZoomOutIcon />
       </Button>

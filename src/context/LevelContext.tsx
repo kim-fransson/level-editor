@@ -18,7 +18,7 @@ export const LevelProvider = ({ children }: PropsWithChildren) => {
   const [state, dispatch] = useReducer(levelReducer, persistentState);
 
   useEffect(() => {
-    setPersistentState(state);
+    setPersistentState({ ...state, mode: "view" });
   }, [setPersistentState, state]);
 
   const paint = (cell: Cell, img?: string) => {

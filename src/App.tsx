@@ -9,7 +9,6 @@ import {
 } from "./components";
 import { LevelProvider } from "./context/LevelContext";
 
-// todo: A way to isolate hotkeys?
 // todo: overflow issue
 export default function App() {
   const contentAreaRef = useRef(null);
@@ -18,7 +17,7 @@ export default function App() {
 
   return (
     <LevelProvider>
-      <div className="h-dvh grid-areas-layout grid-cols-layout grid-rows-layout hidden md:grid">
+      <div className="h-screen grid-areas-layout grid-cols-layout grid-rows-layout hidden md:grid">
         <TilesSidebar />
         <ContentArea ref={contentAreaRef} />
         <Toolbar />

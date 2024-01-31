@@ -32,13 +32,14 @@ export const Settings = () => {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+    setFileName("Untitled");
   };
 
   return (
     <DialogTrigger>
       <Button
         className="outline-none hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed transition-all text-white
-          flex items-center justify-center p-2  rounded pressed:scale-90 focus:bg-blue"
+          flex items-center justify-center p-2  rounded pressed:scale-90 focus-visible:ring-2 ring-yellow-400 pressed:bg-blue"
       >
         <CogWheel />
       </Button>
@@ -57,7 +58,10 @@ export const Settings = () => {
             value={fileName}
             onChange={setFileName}
           >
-            <Input className="w-full transition-colors shadow-lg font-medium tracking-[0.32px] text-white rounded bg-black bg-transparent outline-none p-2 focus:border-blue border-2 border-light-gray" />
+            <Input
+              className="w-full transition-colors shadow-lg font-medium tracking-[0.32px] text-white 
+            rounded bg-black bg-transparent outline-none p-2 focus:border-blue border-2 border-light-gray"
+            />
           </TextField>
           <Button
             onPress={handleExport}

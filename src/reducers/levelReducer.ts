@@ -1,9 +1,10 @@
+import { grid, paintedCells } from "@/data/level";
 import { generateCellsArray } from "@/utils";
 
 export const initialState: LevelState = {
-  grid: generateCellsArray(15, 15),
+  grid: grid,
   mode: "view",
-  paintedCells: [],
+  paintedCells: paintedCells,
   paint: () => {},
   updateMode: () => {},
   erase: () => {},
